@@ -52,15 +52,7 @@ function getFallbackAffirmations(slug: string) {
   return matches.length ? matches.slice(0, 6) : affirmations.slice(0, 6);
 }
 
-function getFallbackVerses(slug: string) {
-  const matches = bibleVerses.filter((item) => item.mood === slug);
-
-  if (matches.length) {
-    return matches
-      .slice(0, 6)
-      .map((item) => `${item.verse} — ${item.reference}`);
-  }
-
+function getFallbackVerses() {
   return bibleVerses
     .slice(0, 6)
     .map((item) => `${item.verse} — ${item.reference}`);
@@ -77,7 +69,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
       : getFallbackAffirmations(topic.slug);
 
   const pageVerses =
-    topic.verses.length > 0 ? topic.verses : getFallbackVerses(topic.slug);
+    topic.verses.length > 0 ? topic.verses : getFallbackVerses();
 
   const relatedTopics = topics
     .filter((item) => item.slug !== topic.slug)
@@ -89,6 +81,9 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
         <p className="eyebrow">Faith Topic</p>
         <h1>{topic.title}</h1>
         <p>{topic.description}</p>
+        <Link className="button" href="/">
+          Home
+        </Link>
         <Link className="button" href="/topics">
           Browse All Topics
         </Link>
