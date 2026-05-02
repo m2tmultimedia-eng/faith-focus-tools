@@ -290,4 +290,11 @@ nav a:hover {
   color: #a47c00;
   font-size: 18px;
   margin-bottom: 22px;
+}.footer-links {
+  margin-top: 12px;
+}
+
+.footer-links a {
+  color: #d4af37;
+  font-weight: 800;
 }

@@ -15,12 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* ✅ FORCE AdSense script into raw HTML */}
-        <meta
-          name="google-adsense-account"
-          content="ca-pub-8678860743472171"
-        />
-
+        <meta name="google-adsense-account" content="ca-pub-8678860743472171" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8678860743472171"
@@ -35,6 +30,7 @@ export default function RootLayout({
           </Link>
 
           <nav>
+            <Link href="/">Home</Link>
             <Link href="/tools/affirmation-generator">Affirmations</Link>
             <Link href="/tools/bible-verse-generator">Bible Verses</Link>
             <Link href="/tools/prayer-generator">Prayer</Link>
@@ -48,6 +44,11 @@ export default function RootLayout({
           <p>
             © {new Date().getFullYear()} FaithFocusTools. Built for daily focus,
             faith, and clarity.
+          </p>
+
+          <p className="footer-links">
+            <Link href="/">Home</Link> · <Link href="/topics">Topics</Link> ·{" "}
+            <Link href="/tools/affirmation-generator">Affirmations</Link>
           </p>
         </footer>
       </body>
