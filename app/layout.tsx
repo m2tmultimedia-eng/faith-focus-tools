@@ -1,6 +1,5 @@
 import "./globals.css";
 import Link from "next/link";
-import Script from "next/script";
 
 export const metadata = {
   title: "Faith Focus Tools | Affirmations, Bible Verses & Prayers",
@@ -15,17 +14,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-
-        {/* AdSense Global Script (Verification + Ads) */}
-        <Script
+      <head>
+        {/* AdSense Verification Script (REQUIRED) */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8678860743472171"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        ></script>
+      </head>
 
-        {/* Header */}
+      <body>
         <header className="site-header">
           <Link href="/" className="logo">
             FaithFocusTools
@@ -39,10 +37,8 @@ export default function RootLayout({
           </nav>
         </header>
 
-        {/* Page Content */}
         <main>{children}</main>
 
-        {/* Footer */}
         <footer className="footer">
           <p>
             © {new Date().getFullYear()} FaithFocusTools. Built for daily focus,
