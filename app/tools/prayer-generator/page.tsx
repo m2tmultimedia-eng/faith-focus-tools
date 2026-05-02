@@ -23,7 +23,7 @@ export default function PrayerGenerator() {
         <p>Simple prayer prompts for focus, peace, strength, and guidance.</p>
       </section>
 
-      <div className="ad-box">Ad Placeholder — Above Tool</div>
+      
 
       <section className="tool-box">
         <div className="result">{prayer}</div>
@@ -31,7 +31,7 @@ export default function PrayerGenerator() {
         <button className="button" onClick={copyText}>Copy</button>
       </section>
 
-      <div className="ad-box">Ad Placeholder — Below Tool</div>
+   
     </main>
   );
 }

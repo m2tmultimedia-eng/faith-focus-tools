@@ -34,7 +34,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
         <p>{topic.description}</p>
       </section>
 
-      <div className="ad-box">Ad Placeholder — Topic Page Top</div>
+     
 
       <section className="grid">
         <div className="card">
@@ -58,7 +58,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
         <a className="button" href="#">Download the Free Reset</a>
       </section>
 
-      <div className="ad-box">Ad Placeholder — Topic Page Bottom</div>
+     
     </main>
   );
 }

@@ -11,7 +11,7 @@ export default function HomePage() {
         <Link className="button" href="/tools/affirmation-generator">Start With Affirmations</Link>
         <Link className="button" href="/tools/bible-verse-generator">Get a Bible Verse</Link>
       </section>
-      <div className="ad-box">Ad Placeholder — Top Homepage Banner</div>
+     
       <section className="grid">
         <Link href="/tools/affirmation-generator" className="card">
           <h2>Affirmation Generator</h2>

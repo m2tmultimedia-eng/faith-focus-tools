@@ -21,14 +21,14 @@ export default function BibleVerseGenerator() {
         <h1>Bible Verse Generator</h1>
         <p>Receive a quick KJV Bible verse for faith, peace, strength, and direction.</p>
       </section>
-      <div className="ad-box">Ad Placeholder — Above Tool</div>
+      
       <section className="tool-box">
         <div className="result">&ldquo;{item.verse}&rdquo;</div>
         <p><strong>{item.reference}</strong></p>
         <button className="button" onClick={generate}>Generate New Verse</button>
         <button className="button" onClick={copyText}>Copy</button>
       </section>
-      <div className="ad-box">Ad Placeholder — Below Tool</div>
+    
       <section className="card">
         <h2>Daily Bible Encouragement</h2>
         <p>
