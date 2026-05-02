@@ -1,13 +1,37 @@
-import { prayers } from '@/lib/data';
-import { PrayerGeneratorContent } from './prayer-generator-content';
-import type { Metadata } from 'next';
+"use client";
 
-export const metadata: Metadata = {
-  title: 'Prayer Generator - Guided Prayer Starters | FaithFocusTools',
-  description:
-    'Need help starting your prayer? Generate guided prayer prompts to begin meaningful conversations with God.',
-};
+import { useState } from "react";
+import { prayers } from "@/lib/data";
 
-export default function PrayerGeneratorPage() {
-  return <PrayerGeneratorContent prayers={prayers} />;
+export default function PrayerGenerator() {
+  const [prayer, setPrayer] = useState(prayers[0]);
+
+  function generate() {
+    const random = prayers[Math.floor(Math.random() * prayers.length)];
+    setPrayer(random);
+  }
+
+  function copyText() {
+    navigator.clipboard.writeText(prayer);
+    alert("Prayer copied.");
+  }
+
+  return (
+    <main className="container">
+      <section className="hero">
+        <h1>Prayer Generator</h1>
+        <p>Simple prayer prompts for focus, peace, strength, and guidance.</p>
+      </section>
+
+      <div className="ad-box">Ad Placeholder — Above Tool</div>
+
+      <section className="tool-box">
+        <div className="result">{prayer}</div>
+        <button className="button" onClick={generate}>Generate Prayer</button>
+        <button className="button" onClick={copyText}>Copy</button>
+      </section>
+
+      <div className="ad-box">Ad Placeholder — Below Tool</div>
+    </main>
+  );
 }
