@@ -4,17 +4,19 @@ import { topics } from "@/lib/data";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://yourdomain.com";
 
-  const staticPages = [
+  const routes = [
     "",
+    "/topics",
     "/tools/affirmation-generator",
     "/tools/bible-verse-generator",
     "/tools/prayer-generator",
+    ...topics.map((topic) => `/topics/${topic.slug}`),
   ];
 
-  const topicPages = topics.map((topic) => `/topics/${topic.slug}`);
-
-  return [...staticPages, ...topicPages].map((url) => ({
-    url: `${baseUrl}${url}`,
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
     lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: route === "" ? 1 : route === "/topics" ? 0.9 : 0.8,
   }));
 }

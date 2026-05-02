@@ -33,12 +33,12 @@ export default function RootLayout({
           <Link href="/" className="logo">
             FaithFocusTools
           </Link>
-          <nav>
-            <Link href="/tools/affirmation-generator">Affirmations</Link>
-            <Link href="/tools/bible-verse-generator">Bible Verses</Link>
-            <Link href="/tools/prayer-generator">Prayer</Link>
-            <Link href="/topics/anxiety">Topics</Link>
-          </nav>
+         <nav>
+  <Link href="/tools/affirmation-generator">Affirmations</Link>
+  <Link href="/tools/bible-verse-generator">Bible Verses</Link>
+  <Link href="/tools/prayer-generator">Prayer</Link>
+  <Link href="/topics">Topics</Link>
+</nav>
         </header>
         {children}
         <footer className="footer">

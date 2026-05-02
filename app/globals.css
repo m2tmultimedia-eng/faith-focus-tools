@@ -207,4 +207,51 @@ nav a:hover {
   .cta {
     padding: 34px 22px;
   }
+}.eyebrow {
+  color: #a47c00 !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  font-size: 14px !important;
+  margin-bottom: 12px !important;
+}
+
+.directory-intro {
+  margin-bottom: 28px;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 900;
+  color: #a47c00;
+}
+
+.content-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin: 42px 0;
+}
+
+.quote {
+  font-size: 20px;
+  font-weight: 800;
+  color: #102a43 !important;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(16, 42, 67, 0.08);
+}
+
+.verse {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #102a43 !important;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(16, 42, 67, 0.08);
+}
+
+.section-title {
+  color: #102a43;
+  font-size: 34px;
+  margin-top: 55px;
 }
