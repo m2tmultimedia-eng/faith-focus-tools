@@ -40,17 +40,19 @@ export default function RootLayout({
 
         <main>{children}</main>
 
-        <footer className="footer">
-          <p>
-            © {new Date().getFullYear()} FaithFocusTools. Built for daily focus,
-            faith, and clarity.
-          </p>
+      <footer className="footer">
+  <p>
+    © {new Date().getFullYear()} FaithFocusTools. Built for daily focus,
+    faith, and clarity.
+  </p>
 
-          <p className="footer-links">
-            <Link href="/">Home</Link> · <Link href="/topics">Topics</Link> ·{" "}
-            <Link href="/tools/affirmation-generator">Affirmations</Link>
-          </p>
-        </footer>
+  <p className="footer-links">
+    <Link href="/">Home</Link> · <Link href="/topics">Topics</Link> ·{" "}
+    <Link href="/privacy-policy">Privacy Policy</Link> ·{" "}
+    <Link href="/terms">Terms</Link> ·{" "}
+    <Link href="/contact">Contact</Link>
+  </p>
+</footer>
       </body>
     </html>
   );
