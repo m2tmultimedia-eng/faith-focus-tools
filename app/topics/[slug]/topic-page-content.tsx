@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { siteConfig } from '@/lib/site';
 
 type Topic = {
   slug: string;
@@ -62,7 +63,7 @@ export function TopicPageContent({ topic }: TopicPageContentProps) {
       <div className="cta">
         <h2>Faith Resources</h2>
         <p style={{ opacity: 0.85 }}>Tools and gifts to deepen your walk with God</p>
-        <a href="#" className="button" style={{ marginTop: '16px' }}>Shop Now</a>
+        <Link href={siteConfig.partnerUrl} className="button" style={{ marginTop: '16px' }}>Partner With Us</Link>
       </div>
 
       <div className="ad-box">Ad Space</div>

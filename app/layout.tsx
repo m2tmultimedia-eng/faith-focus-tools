@@ -1,10 +1,43 @@
 import "./globals.css";
-import Link from "next/link";
+import type { Metadata } from "next";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { siteConfig } from "@/lib/site";
 
-export const metadata = {
-  title: "Faith Focus Tools | Affirmations, Bible Verses & Prayers",
-  description:
-    "Free daily affirmations, Bible verse generator, prayer prompts, and faith-based encouragement tools.",
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -15,44 +48,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-8678860743472171" />
+        <meta name="google-adsense-account" content={siteConfig.adsensePublisherId} />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8678860743472171"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsensePublisherId}`}
           crossOrigin="anonymous"
         ></script>
       </head>
 
       <body>
-        <header className="site-header">
-          <Link href="/" className="logo">
-            FaithFocusTools
-          </Link>
-
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/tools/affirmation-generator">Affirmations</Link>
-            <Link href="/tools/bible-verse-generator">Bible Verses</Link>
-            <Link href="/tools/prayer-generator">Prayer</Link>
-            <Link href="/topics">Topics</Link>
-          </nav>
-        </header>
-
-        <main>{children}</main>
-
-      <footer className="footer">
-  <p>
-    © {new Date().getFullYear()} FaithFocusTools. Built for daily focus,
-    faith, and clarity.
-  </p>
-
-  <p className="footer-links">
-    <Link href="/">Home</Link> · <Link href="/topics">Topics</Link> ·{" "}
-    <Link href="/privacy-policy">Privacy Policy</Link> ·{" "}
-    <Link href="/terms">Terms</Link> ·{" "}
-    <Link href="/contact">Contact</Link>
-  </p>
-</footer>
+        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={organizationJsonLd()} />
+        <SiteHeader />
+        {children}
+        <SiteFooter />
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdsenseAd } from "@/components/adsense-ad";
 import { topics } from "@/lib/data";
 
 export const metadata = {
@@ -26,6 +27,8 @@ export default function TopicsPage() {
           reflection, prayer, journaling, or a quick mindset reset.
         </p>
       </section>
+
+      <AdsenseAd className="top-ad" />
 
       <section className="grid">
         {topics.map((topic) => (

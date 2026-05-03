@@ -2,7 +2,8 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Contact | FaithFocusTools",
-  description: "Contact FaithFocusTools.",
+  description:
+    "Contact FaithFocusTools for questions, content suggestions, sponsorships, and advertising partnerships.",
 };
 
 export default function ContactPage() {
@@ -12,7 +13,8 @@ export default function ContactPage() {
         <p className="eyebrow">Contact</p>
         <h1>Contact FaithFocusTools</h1>
         <p>
-          Have a question, suggestion, or issue with the site? Reach out below.
+          Have a question, suggestion, sponsorship inquiry, or issue with the
+          site? Reach out below.
         </p>
       </section>
 
@@ -29,6 +31,12 @@ export default function ContactPage() {
         <p>
           If you would like to suggest new affirmations, prayer topics, Bible
           verse categories, or site improvements, send a message anytime.
+        </p>
+
+        <h2>Advertising and Partnerships</h2>
+        <p>
+          FaithFocusTools is open to aligned sponsorships, affiliate placements,
+          digital product partnerships, and family-safe advertising inquiries.
         </p>
 
         <h2>Response Time</h2>

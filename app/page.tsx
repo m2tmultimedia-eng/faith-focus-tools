@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { AdsenseAd } from "@/components/adsense-ad";
+import { ProductCTA } from "@/components/product-cta";
+import { siteConfig } from "@/lib/site";
 
 export default function HomePage() {
   return (
@@ -11,6 +14,8 @@ export default function HomePage() {
         <Link className="button" href="/tools/affirmation-generator">Start With Affirmations</Link>
         <Link className="button" href="/tools/bible-verse-generator">Get a Bible Verse</Link>
       </section>
+
+      <AdsenseAd className="top-ad" />
      
       <section className="grid">
         <Link href="/tools/affirmation-generator" className="card">
@@ -28,9 +33,11 @@ export default function HomePage() {
       </section>
       <section className="cta">
         <h2>Want the 7-Day Faith & Focus Reset?</h2>
-        <p>Add your email opt-in or Gumroad product link here.</p>
-        <a className="button" href="#">Get the Free Guide</a>
+        <p>Turn these tools into a simple daily rhythm for prayer, focus, and reflection.</p>
+        <Link className="button" href={siteConfig.freeGuideUrl}>Get the Free Guide</Link>
       </section>
+
+      <ProductCTA />
     </main>
   );
 }

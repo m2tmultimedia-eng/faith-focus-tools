@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AdsenseAd } from "@/components/adsense-ad";
+import { ProductCTA } from "@/components/product-cta";
 import { affirmations, bibleVerses, topics } from "@/lib/data";
+import { JsonLd, faqJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return topics.map((topic) => ({
@@ -46,9 +49,27 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
 
   const pageAffirmations = getAffirmations(topic.slug);
   const pageVerses = getVerses();
+  const faqs = [
+    {
+      question: `What are the best affirmations for ${topic.slug}?`,
+      answer:
+        "The best affirmations are simple, consistent, and repeated daily. Focus on statements that reinforce growth, calm, and direction.",
+    },
+    {
+      question: "Do affirmations really work?",
+      answer:
+        "Affirmations work best when paired with repetition and action. They help shift thinking and reinforce positive habits over time.",
+    },
+    {
+      question: "How often should I use affirmations?",
+      answer:
+        "Daily use is most effective. Morning and night are strong times to reinforce new thought patterns.",
+    },
+  ];
 
   return (
     <main className="container">
+      <JsonLd data={faqJsonLd(faqs)} />
       {/* HERO */}
       <section className="hero">
         <h1>{topic.title}</h1>
@@ -61,6 +82,8 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
           Home
         </Link>
       </section>
+
+      <AdsenseAd className="top-ad" />
 
       {/* AFFIRMATIONS */}
       <section className="card">
@@ -99,24 +122,12 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
       <section className="card">
         <h2>Frequently Asked Questions</h2>
 
-        <h3>What are the best affirmations for {topic.slug}?</h3>
-        <p>
-          The best affirmations for {topic.slug} are simple, consistent, and
-          repeated daily. Focus on statements that reinforce growth, calm, and
-          direction.
-        </p>
-
-        <h3>Do affirmations really work?</h3>
-        <p>
-          Affirmations work when paired with repetition and action. They help
-          shift your thinking and reinforce positive habits over time.
-        </p>
-
-        <h3>How often should I use affirmations?</h3>
-        <p>
-          Daily use is most effective. Morning and night are the best times to
-          reinforce new thought patterns.
-        </p>
+        {faqs.map((item) => (
+          <div key={item.question}>
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
       </section>
 
       {/* INTERNAL LINKS (CRITICAL) */}
@@ -135,6 +146,8 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
           → Prayer Generator
         </Link>
       </section>
+
+      <ProductCTA />
     </main>
   );
 }

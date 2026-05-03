@@ -1,84 +1,97 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useMemo, useState } from "react";
+import { AdsenseAd } from "@/components/adsense-ad";
+import { prayers } from "@/lib/data";
 
-type PrayerGeneratorContentProps = {
-  prayers: string[];
+const prayerCategories = {
+  All: prayers,
+  Peace: prayers.filter((item) =>
+    item.toLowerCase().includes("peace") ||
+    item.toLowerCase().includes("calm") ||
+    item.toLowerCase().includes("stress")
+  ),
+  Guidance: prayers.filter((item) =>
+    item.toLowerCase().includes("guide") ||
+    item.toLowerCase().includes("direction") ||
+    item.toLowerCase().includes("clarity")
+  ),
+  Strength: prayers.filter((item) =>
+    item.toLowerCase().includes("strength") ||
+    item.toLowerCase().includes("courage") ||
+    item.toLowerCase().includes("weak")
+  ),
+  Discipline: prayers.filter((item) =>
+    item.toLowerCase().includes("discipline") ||
+    item.toLowerCase().includes("focused") ||
+    item.toLowerCase().includes("consistent")
+  ),
 };
 
-export function PrayerGeneratorContent({ prayers }: PrayerGeneratorContentProps) {
-  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+export function PrayerGeneratorContent() {
+  const [category, setCategory] =
+    useState<keyof typeof prayerCategories>("All");
+  const [prayer, setPrayer] = useState(prayers[0]);
 
-  const generateRandom = () => {
-    setIsGenerating(true);
-    setCurrentIndex(null);
-    setTimeout(() => {
-      setCurrentIndex(Math.floor(Math.random() * prayers.length));
-      setIsGenerating(false);
-    }, 500);
-  };
+  const currentList = useMemo(() => {
+    return prayerCategories[category].length
+      ? prayerCategories[category]
+      : prayers;
+  }, [category]);
+
+  function generate() {
+    const random = currentList[Math.floor(Math.random() * currentList.length)];
+    setPrayer(random);
+  }
+
+  function copyText() {
+    navigator.clipboard.writeText(prayer);
+    alert("Prayer copied.");
+  }
+
+  function shareText() {
+    if (navigator.share) {
+      navigator.share({
+        title: "Faith Focus Prayer",
+        text: prayer,
+        url: window.location.href,
+      });
+    } else {
+      copyText();
+    }
+  }
 
   return (
-    <div className="container">
-      <h1 style={{ textAlign: 'center', color: '#102a43', fontSize: 'clamp(28px, 4vw, 42px)', margin: '50px 0 10px' }}>
-        Prayer Generator
-      </h1>
-      <p style={{ textAlign: 'center', color: '#666', fontSize: '18px', maxWidth: '600px', margin: '0 auto 30px', lineHeight: 1.6 }}>
-        Generate guided prayer starters to help you begin meaningful conversations with God.
-      </p>
+    <>
+      <AdsenseAd className="top-ad" />
 
-      <div className="ad-box">Ad Space</div>
+      <section className="tool-box">
+        <div className="category-row">
+          {Object.keys(prayerCategories).map((item) => (
+            <button
+              key={item}
+              className={category === item ? "chip active-chip" : "chip"}
+              onClick={() =>
+                setCategory(item as keyof typeof prayerCategories)
+              }
+            >
+              {item}
+            </button>
+          ))}
+        </div>
 
-      {/* Generator Box */}
-      <div className="tool-box">
-        {isGenerating ? (
-          <p style={{ color: '#666', fontSize: '16px' }}>Preparing your prayer prompt...</p>
-        ) : currentIndex !== null ? (
-          <div>
-            <p className="result">{prayers[currentIndex]}</p>
-          </div>
-        ) : (
-          <div>
-            <p style={{ color: '#999', fontSize: '16px', marginBottom: '6px' }}>Click the button below to generate</p>
-            <p style={{ color: '#bbb', fontSize: '13px' }}>{prayers.length} prayer prompts available</p>
-          </div>
-        )}
-        <button onClick={generateRandom} disabled={isGenerating} className="button">
+        <div className="result">{prayer}</div>
+
+        <button className="button" onClick={generate}>
           Generate Prayer
         </button>
-      </div>
-
-      {/* All Prayers */}
-      <h2 style={{ color: '#102a43', fontSize: '24px', marginBottom: '4px' }}>
-        All Prayer Prompts
-        <span style={{ fontSize: '14px', color: '#999', fontWeight: 400, marginLeft: '8px' }}>
-          ({prayers.length})
-        </span>
-      </h2>
-      <div className="grid">
-        {prayers.map((prayer, i) => (
-          <div
-            key={i}
-            className="card"
-            style={{
-              border: currentIndex === i ? '2px solid #102a43' : undefined,
-            }}
-          >
-            <p style={{ fontSize: '15px', lineHeight: 1.5 }}>{prayer}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="ad-box">Ad Space</div>
-
-      <div className="cta">
-        <h2>Faith Resources</h2>
-        <p style={{ opacity: 0.85 }}>Tools and gifts to deepen your walk with God</p>
-        <a href="#" className="button" style={{ marginTop: '16px' }}>Shop Now</a>
-      </div>
-
-      <div className="ad-box">Ad Space</div>
-    </div>
+        <button className="button secondary-button" onClick={copyText}>
+          Copy
+        </button>
+        <button className="button secondary-button" onClick={shareText}>
+          Share
+        </button>
+      </section>
+    </>
   );
 }
