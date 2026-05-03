@@ -11,142 +11,129 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const topic = topics.find((t) => t.slug === params.slug);
 
-  if (!topic) {
-    return {
-      title: "Faith Topic | FaithFocusTools",
-    };
-  }
+  if (!topic) return { title: "Faith Topic" };
 
   return {
     title: `${topic.title} | FaithFocusTools`,
-    description: topic.description,
+    description: `Discover ${topic.title.toLowerCase()} including affirmations, Bible verses, and daily encouragement.`,
   };
 }
 
-function getFallbackAffirmations(slug: string) {
-  const keywordMap: Record<string, string[]> = {
-    anxiety: ["peace", "calm", "worry", "fear", "stress"],
-    confidence: ["confidence", "stronger", "potential", "courage"],
-    success: ["success", "growth", "progress", "purpose", "results"],
-    fear: ["fear", "faith", "courage"],
-    peace: ["peace", "calm", "grounded"],
-    healing: ["healing", "restore", "stronger", "grow"],
-    purpose: ["purpose", "aligned", "direction", "future"],
-    money: ["money", "wealth", "financial", "value", "income"],
-    discipline: ["discipline", "consistent", "habits", "show up"],
-    motivation: ["progress", "future", "move forward", "growth"],
-    morning: ["today", "clarity", "purpose"],
-    night: ["peace", "release", "rest"],
-    gratitude: ["blessings", "thank", "growth"],
-    stress: ["stress", "calm", "peace", "breathe"],
-    work: ["work", "value", "results", "effort"],
-    relationships: ["love", "peace", "wisdom"],
-  };
+/* =========================
+   FALLBACK CONTENT
+========================= */
 
-  const keywords = keywordMap[slug] || [slug];
-
+function getAffirmations(slug: string) {
   const matches = affirmations.filter((item) =>
-    keywords.some((keyword) => item.toLowerCase().includes(keyword))
+    item.toLowerCase().includes(slug)
   );
-
   return matches.length ? matches.slice(0, 6) : affirmations.slice(0, 6);
 }
 
-function getFallbackVerses() {
+function getVerses() {
   return bibleVerses
     .slice(0, 6)
     .map((item) => `${item.verse} — ${item.reference}`);
 }
 
+/* =========================
+   MAIN PAGE
+========================= */
+
 export default function TopicPage({ params }: { params: { slug: string } }) {
   const topic = topics.find((t) => t.slug === params.slug);
-
   if (!topic) notFound();
 
-  const pageAffirmations =
-    topic.affirmations.length > 0
-      ? topic.affirmations
-      : getFallbackAffirmations(topic.slug);
-
-  const pageVerses =
-    topic.verses.length > 0 ? topic.verses : getFallbackVerses();
-
-  const relatedTopics = topics
-    .filter((item) => item.slug !== topic.slug)
-    .slice(0, 6);
+  const pageAffirmations = getAffirmations(topic.slug);
+  const pageVerses = getVerses();
 
   return (
     <main className="container">
+      {/* HERO */}
       <section className="hero">
-        <p className="eyebrow">Faith Topic</p>
         <h1>{topic.title}</h1>
-        <p>{topic.description}</p>
+        <p>
+          Looking for {topic.slug} affirmations and Bible verses? Here are simple,
+          powerful words to help you refocus, reset, and move forward with faith.
+        </p>
+
         <Link className="button" href="/">
           Home
         </Link>
-        <Link className="button" href="/topics">
-          Browse All Topics
-        </Link>
       </section>
 
-      <section className="content-section">
-        <div className="card">
-          <h2>Affirmations</h2>
-          {pageAffirmations.map((item) => (
-            <p key={item} className="quote">
-              “{item}”
-            </p>
-          ))}
-        </div>
-
-        <div className="card">
-          <h2>Bible Verses</h2>
-          {pageVerses.map((item) => (
-            <p key={item} className="verse">
-              {item}
-            </p>
-          ))}
-        </div>
-      </section>
-
+      {/* AFFIRMATIONS */}
       <section className="card">
-        <h2>How to Use These Words Today</h2>
+        <h2>{topic.slug} Affirmations</h2>
+        {pageAffirmations.map((item) => (
+          <p key={item}>“{item}”</p>
+        ))}
+      </section>
+
+      {/* BIBLE VERSES */}
+      <section className="card">
+        <h2>Bible Verses for {topic.slug}</h2>
+        {pageVerses.map((item) => (
+          <p key={item}>{item}</p>
+        ))}
+      </section>
+
+      {/* SEO CONTENT BLOCK */}
+      <section className="card">
+        <h2>How to Use {topic.slug} Affirmations Daily</h2>
         <p>
-          Read one affirmation slowly. Then read one Bible verse. Take a breath,
-          write down one action you can take today, and keep it simple. Faith
-          works better when it has feet.
+          Using affirmations for {topic.slug} works best when you repeat them
+          consistently and pair them with action. Start by choosing one
+          affirmation and repeating it in the morning. Then apply it during your
+          day when situations challenge your mindset.
+        </p>
+
+        <p>
+          Bible verses for {topic.slug} can be used alongside affirmations to
+          strengthen your focus and faith. Read one verse slowly, reflect on its
+          meaning, and carry it with you throughout the day.
         </p>
       </section>
 
-      <section className="cta">
-        <h2>Want a Quick Daily Reset?</h2>
+      {/* FAQ SECTION (SEO BOOST) */}
+      <section className="card">
+        <h2>Frequently Asked Questions</h2>
+
+        <h3>What are the best affirmations for {topic.slug}?</h3>
         <p>
-          Generate a fresh affirmation or prayer when you need a simple moment
-          of focus.
+          The best affirmations for {topic.slug} are simple, consistent, and
+          repeated daily. Focus on statements that reinforce growth, calm, and
+          direction.
         </p>
-        <Link className="button" href="/tools/affirmation-generator">
-          Affirmation Generator
-        </Link>
-        <Link className="button" href="/tools/prayer-generator">
-          Prayer Generator
-        </Link>
+
+        <h3>Do affirmations really work?</h3>
+        <p>
+          Affirmations work when paired with repetition and action. They help
+          shift your thinking and reinforce positive habits over time.
+        </p>
+
+        <h3>How often should I use affirmations?</h3>
+        <p>
+          Daily use is most effective. Morning and night are the best times to
+          reinforce new thought patterns.
+        </p>
       </section>
 
-      <section>
-        <h2 className="section-title">Related Faith Topics</h2>
-        <div className="grid">
-          {relatedTopics.map((related) => (
-            <Link
-              key={related.slug}
-              href={`/topics/${related.slug}`}
-              className="card"
-            >
-              <h3>{related.title}</h3>
-              <p>{related.description}</p>
-              <span className="text-link">Read more →</span>
-            </Link>
-          ))}
-        </div>
+      {/* INTERNAL LINKS (CRITICAL) */}
+      <section className="card">
+        <h2>Try These Tools</h2>
+
+        <Link href="/tools/affirmation-generator">
+          → Affirmation Generator
+        </Link>
+        <br />
+        <Link href="/tools/bible-verse-generator">
+          → Bible Verse Generator
+        </Link>
+        <br />
+        <Link href="/tools/prayer-generator">
+          → Prayer Generator
+        </Link>
       </section>
     </main>
   );
