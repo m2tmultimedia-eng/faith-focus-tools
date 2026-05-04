@@ -1,54 +1,39 @@
 "use client";
 
-import { useState } from "react";
 import { AdsenseAd } from "@/components/adsense-ad";
-import { bibleVerses } from "@/lib/data";
+import { PremiumGenerator } from "@/components/premium-generator";
+import { bibleVerses, bibleVersesByCategory } from "@/lib/data";
+
+const moodOptions = [
+  { label: "Anxiety", lookup: "anxiety" },
+  { label: "Confidence", lookup: "strength" },
+  { label: "Wealth", lookup: "faith" },
+  { label: "Healing", lookup: "healing" },
+  { label: "Focus", lookup: "faith" },
+  { label: "Faith", lookup: "faith" },
+  { label: "Sleep", lookup: "peace" },
+];
 
 export function BibleVerseGeneratorContent() {
-  const [item, setItem] = useState(bibleVerses[0]);
-
-  function generate() {
-    const random = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
-    setItem(random);
-  }
-
-  function copyText() {
-    navigator.clipboard.writeText(`${item.verse} - ${item.reference}`);
-    alert("Bible verse copied.");
-  }
-
-  function shareText() {
-    const text = `${item.verse} - ${item.reference}`;
-
-    if (navigator.share) {
-      navigator.share({
-        title: "Faith Focus Bible Verse",
-        text,
-        url: window.location.href,
-      });
-    } else {
-      copyText();
-    }
-  }
-
   return (
     <>
       <AdsenseAd className="top-ad" />
-
-      <section className="tool-box">
-        <div className="result">&ldquo;{item.verse}&rdquo;</div>
-        <p className="verse-reference">{item.reference}</p>
-
-        <button className="button" onClick={generate}>
-          Generate New Verse
-        </button>
-        <button className="button secondary-button" onClick={copyText}>
-          Copy
-        </button>
-        <button className="button secondary-button" onClick={shareText}>
-          Share
-        </button>
-      </section>
+      <PremiumGenerator
+        type="bibleVerse"
+        title="Faith Focus Bible Verse"
+        dailyTitle="Daily Bible Verse"
+        generateLabel="Generate Verse"
+        items={bibleVerses}
+        index={bibleVersesByCategory}
+        moodOptions={moodOptions}
+        getDisplayText={(item) => item.text}
+        getShareText={(item, deeperText) =>
+          deeperText || `${item.text} - ${item.reference}`
+        }
+        getDeeperText={(item) =>
+          `${item.text} - ${item.reference} Pause with this verse for a moment. Notice the promise, instruction, or comfort inside it, then carry one phrase with you as a steady reminder throughout the day.`
+        }
+      />
     </>
   );
 }

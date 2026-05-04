@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/tools/affirmation-generator", priority: 0.9 },
     { path: "/tools/bible-verse-generator", priority: 0.9 },
     { path: "/tools/prayer-generator", priority: 0.9 },
+    { path: "/favorites", priority: 0.5 },
     { path: "/privacy-policy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
     { path: "/contact", priority: 0.4 },

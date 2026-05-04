@@ -2,7 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdsenseAd } from "@/components/adsense-ad";
 import { ProductCTA } from "@/components/product-cta";
-import { affirmations, bibleVerses, topics } from "@/lib/data";
+import {
+  affirmations,
+  bibleVersesByCategory,
+  topics,
+} from "@/lib/data";
+import { getItemsForCategory } from "@/lib/content";
 import { JsonLd, faqJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -27,16 +32,19 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 ========================= */
 
 function getAffirmations(slug: string) {
+  const mappedSlug = slug === "money" ? "abundance" : slug === "success" ? "self-discipline" : slug;
   const matches = affirmations.filter((item) =>
-    item.toLowerCase().includes(slug)
+    item.toLowerCase().includes(mappedSlug)
   );
   return matches.length ? matches.slice(0, 6) : affirmations.slice(0, 6);
 }
 
-function getVerses() {
-  return bibleVerses
+function getVerses(slug: string) {
+  const mappedSlug = slug === "confidence" ? "faith" : slug === "money" ? "faith" : slug;
+  const selected = getItemsForCategory(bibleVersesByCategory, mappedSlug);
+  return selected
     .slice(0, 6)
-    .map((item) => `${item.verse} — ${item.reference}`);
+    .map((item) => `${item.text} — ${item.reference}`);
 }
 
 /* =========================
@@ -48,7 +56,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
   if (!topic) notFound();
 
   const pageAffirmations = getAffirmations(topic.slug);
-  const pageVerses = getVerses();
+  const pageVerses = getVerses(topic.slug);
   const faqs = [
     {
       question: `What are the best affirmations for ${topic.slug}?`,
