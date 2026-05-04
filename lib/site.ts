@@ -24,5 +24,6 @@ export const mainNav = [
   { href: "/tools/bible-verse-generator", label: "Bible Verses" },
   { href: "/tools/prayer-generator", label: "Prayer" },
   { href: "/topics", label: "Topics" },
+  { href: "/resources", label: "Resources" },
   { href: "/favorites", label: "Favorites" },
 ];
