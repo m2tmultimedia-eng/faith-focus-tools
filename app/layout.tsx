@@ -60,6 +60,21 @@ export default function RootLayout({
       </head>
 
       <body>
+
+<nav className="border-b">
+  <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="/" className="text-xl font-bold">Faith Focus Tools</a>
+
+    <div className="flex gap-5 text-sm font-medium">
+      <a href="/">Home</a>
+      <a href="/articles">Articles</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </div>
+</nav>
+
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={organizationJsonLd()} />
         <SiteHeader />
