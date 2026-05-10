@@ -1,3 +1,4 @@
+import SiteFooter from "@/app/components/site-footer"
 import "./globals.css";
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
