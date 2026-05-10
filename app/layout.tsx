@@ -1,8 +1,7 @@
-import SiteFooter from "@/app/components/site-footer"
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
 import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
@@ -60,26 +59,28 @@ export default function RootLayout({
       </head>
 
       <body>
+        <SiteHeader />
+        <header className="border-b bg-white">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <a href="/" className="text-xl font-bold">Faith Focus Tools</a>
+            <nav className="flex gap-5 text-sm font-medium">
+              <a href="/">Home</a>
+              <a href="/articles">Articles</a>
+              <a href="/about">About</a>
+              <a href="/contact">Contact</a>
+              <a href="/privacy">Privacy</a>
+            </nav>
+          </div>
+        </header>
 
-<nav className="border-b">
-  <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href="/" className="text-xl font-bold">Faith Focus Tools</a>
 
-    <div className="flex gap-5 text-sm font-medium">
-      <a href="/">Home</a>
-      <a href="/articles">Articles</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/privacy">Privacy</a>
-    </div>
-  </div>
-</nav>
 
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={organizationJsonLd()} />
-        <SiteHeader />
+        
         {children}
-        <SiteFooter />
+        
+              <SiteFooter />
       </body>
     </html>
   );
