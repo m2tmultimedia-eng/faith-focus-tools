@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Christian Goal Setting",
-  description: "Faith-based encouragement for procrastination, unclear goals, and lack of direction.",
+  title: "Prayers for Family Peace",
+  description: "Faith-based encouragement for family conflict, resentment, and tension.",
 };
 
 export default function Page() {
@@ -8,10 +8,10 @@ export default function Page() {
     <main className="mx-auto max-w-3xl px-6 py-12 space-y-8">
       <a href="/articles" className="underline">← Back to Articles</a>
 
-      <h1 className="text-5xl font-bold leading-tight">Christian Goal Setting</h1>
+      <h1 className="text-5xl font-bold leading-tight">Prayers for Family Peace</h1>
 
       <p className="text-xl opacity-80">
-        This guide explores practical faith-based encouragement for procrastination, unclear goals, and lack of direction.
+        This guide explores practical faith-based encouragement for family conflict, resentment, and tension.
       </p>
 
       <section className="space-y-7 text-lg leading-9">
