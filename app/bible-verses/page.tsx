@@ -1,17 +1,34 @@
+"use client";
+
+import { useState } from "react";
+
+const verses = [
+  ["Peace", "Let your heart slow down. God’s peace can meet you before every problem is solved."],
+  ["Strength", "You can take the next faithful step even when you feel tired."],
+  ["Wisdom", "Ask God for wisdom before reacting from pressure."],
+  ["Courage", "Fear may be present, but it does not get the final word."],
+  ["Gratitude", "Notice what God has already carried you through."],
+];
+
 export default function Page() {
+  const [item, setItem] = useState(verses[0]);
+
   return (
-    <main style={{ maxWidth: "1000px", margin: "0 auto", padding: "48px 24px" }}>
-      <h1>Bible Verses</h1>
-      <p>
-        Explore scripture-inspired reflection for peace, courage, wisdom, gratitude, confidence,
-        and spiritual focus.
+    <main style={{ maxWidth: 1000, margin: "0 auto", padding: "60px 24px" }}>
+      <h1 style={{ fontSize: 52 }}>Bible Verse Reflection Generator</h1>
+      <p style={{ fontSize: 21, lineHeight: 1.6 }}>
+        Generate a simple scripture-inspired reflection for peace, courage, wisdom, gratitude, and spiritual focus.
       </p>
 
-      <section style={{ marginTop: 32, padding: 24, border: "1px solid #ddd", borderRadius: 18, background: "white" }}>
-        <h2>Verse Reflection</h2>
-        <p>
-          Choose one verse, read it slowly, and ask: what does this reveal about God, and how should I respond today?
-        </p>
+      <section style={{ marginTop: 35, background: "white", border: "1px solid #ddd", borderRadius: 24, padding: 34 }}>
+        <h2>{item[0]} Reflection</h2>
+        <p style={{ fontSize: 26, lineHeight: 1.5, fontWeight: 700 }}>{item[1]}</p>
+        <button
+          onClick={() => setItem(verses[Math.floor(Math.random() * verses.length)])}
+          style={{ background: "#12324A", color: "white", border: 0, padding: "14px 22px", borderRadius: 12, fontWeight: 800, cursor: "pointer" }}
+        >
+          Generate New Reflection
+        </button>
       </section>
     </main>
   );
