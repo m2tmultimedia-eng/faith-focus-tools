@@ -1,32 +1,25 @@
-import Link from "next/link";
-
-export const metadata = {
-  title: "Faith Articles and Bible-Based Encouragement",
-  description: "Read faith-based articles on prayer, biblical affirmations, anxiety, confidence, gratitude, financial stress, and Christian goal setting.",
-};
-
-const articles = [
-  ["How Biblical Affirmations Actually Work", "/articles/how-biblical-affirmations-work"],
-  ["Prayers for Anxiety and Peace", "/articles/prayers-for-anxiety"],
-  ["A Simple Morning Prayer Routine", "/articles/morning-prayer-routine"],
-  ["Scriptures for Financial Stress", "/articles/scriptures-for-financial-stress"],
-  ["Christian Goal Setting", "/articles/christian-goal-setting"],
-  ["Bible Verses for Confidence", "/articles/bible-verses-for-confidence"],
-  ["Prayers for Overthinking", "/articles/prayers-for-overthinking"],
-  ["Gratitude Journaling With God", "/articles/gratitude-journaling-with-god"],
-];
-
 export default function ArticlesPage() {
+  const articles = [
+    ["/articles/prayers-for-anxiety", "Prayers for Anxiety and Peace"],
+    ["/articles/how-biblical-affirmations-work", "How Biblical Affirmations Actually Work"],
+    ["/articles/morning-prayer-routine", "A Simple Morning Prayer Routine"],
+    ["/articles/scriptures-for-financial-stress", "Scriptures for Financial Stress"],
+    ["/articles/christian-goal-setting", "Christian Goal Setting"],
+  ];
+
   return (
-    <main className="mx-auto max-w-4xl px-6 py-12">
-      <h1 className="text-4xl font-bold mb-4">Faith Articles</h1>
-      <p className="mb-8">Practical, scripture-inspired encouragement for prayer, mindset, peace, confidence, and daily focus.</p>
-      <div className="grid gap-4">
-        {articles.map(([title, href]) => (
-          <Link key={href} href={href} className="rounded-2xl border p-5 hover:shadow-md transition">
-            <h2 className="text-xl font-semibold">{title}</h2>
-            <p className="text-sm opacity-75 mt-2">Read the guide →</p>
-          </Link>
+    <main className="mx-auto max-w-5xl px-6 py-12">
+      <h1 className="text-4xl font-bold">Faith Articles</h1>
+      <p className="mt-4 text-lg">
+        Practical faith-based guides for prayer, peace, mindset, scripture reflection, and daily encouragement.
+      </p>
+
+      <div className="mt-10 grid gap-5 md:grid-cols-2">
+        {articles.map(([href, title]) => (
+          <a key={href} href={href} className="rounded-2xl border p-6 hover:shadow-md transition">
+            <h2 className="text-2xl font-semibold">{title}</h2>
+            <p className="mt-3">Read article →</p>
+          </a>
         ))}
       </div>
     </main>
